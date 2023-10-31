@@ -36,7 +36,7 @@ const CreateProducts = () => {
 
     return (
         <>
-            <dialog id="create_user" className="modal">
+            <dialog id="create_product" className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

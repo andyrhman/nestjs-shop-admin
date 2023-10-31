@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import http from "@/services/Api";
 
 // Layout Component
 import AdminNavbar from "@/components/AdminNavbar";
@@ -17,7 +17,7 @@ const AdminWrapper = (props) => {
         (
             async () => {
                 try {
-                    const {data} = await axios.get('');
+                    const {data} = await http.get('admin');
                     setUser(data);
                 } catch (error) {
                     if (error.response && error.response.status === 401) {
