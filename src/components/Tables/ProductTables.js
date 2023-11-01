@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+import { TrashIcon, PencilSquareIcon, EyeIcon } from "@heroicons/react/24/solid";
 
-const ProductTables = ({ number, image, title, description, price, editId, deleteId }) => {
+const ProductTables = ({ number, image, title, description, price, editId, deleteId, showP }) => {
     return (
         <>
 
@@ -24,6 +24,9 @@ const ProductTables = ({ number, image, title, description, price, editId, delet
             </td>
             <td>Rp{new Intl.NumberFormat('id-ID').format(price)}</td>
             <td>
+                <Link href={showP} className="btn btn-circle btn-info">
+                    <EyeIcon strokeWidth={2} className="h-4 w-4" />
+                </Link>
                 <Link href={editId} className="btn btn-circle btn-primary">
                     <PencilSquareIcon strokeWidth={2} className="h-4 w-4" />
                 </Link>

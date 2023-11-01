@@ -251,7 +251,8 @@ const Product = () => {
                                                     image={p.image}
                                                     description={p.description.split(' ').slice(0, 20).join(' ')}
                                                     price={p.price}
-                                                    editId={`/dashboard/products/${p.id}`}
+                                                    editId={`/products/edit/${p.id}`}
+                                                    showP={`/products/show/${p.slug}`}
                                                     deleteId={() => del(p.id)}
                                                 />
                                             </tr>

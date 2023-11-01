@@ -12,13 +12,12 @@ import { setUser } from "@/redux/actions/setUserAction";
 
 const AdminWrapper = (props) => {
     const router = useRouter()
-    const { setUser } = props;
     useEffect(() => {
         (
             async () => {
                 try {
                     const {data} = await http.get('admin');
-                    setUser(data);
+                    props.setUser(data);
                 } catch (error) {
                     if (error.response && error.response.status === 401) {
                         router.push('/login');
@@ -33,9 +32,8 @@ const AdminWrapper = (props) => {
                     }
                 }
             }
-        )()
-
-    }, [setUser, router])
+        )();
+    }, [])
     
     return (
         <Layout>
