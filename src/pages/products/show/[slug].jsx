@@ -8,6 +8,7 @@ import AdminWrapper from '@/components/AdminWrapper'
 
 const ShowProduct = () => {
     const [product, setProduct] = useState('');
+    const [category, setCategory] = useState('')
     const [multipleImg, setMultipleImg] = useState([]);
     const [variants, setVariants] = useState([]);
 
@@ -21,7 +22,8 @@ const ShowProduct = () => {
                         const {data} = await http.get(`product/${slug}`)
                         setProduct(data);
                         setMultipleImg(data.product_images);
-                        setVariants(data.variant)
+                        setVariants(data.variant);
+                        setCategory(data.category.name)
                     } catch (error) {
                         if (error.response && error.response.status === 401) {
                             router.push('/login');
@@ -63,6 +65,7 @@ const ShowProduct = () => {
                                     price={product.price}
                                     product_images={multipleImg}
                                     variants={variants}
+                                    category={category}
                                 />
                             </div>
                         </div>

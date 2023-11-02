@@ -78,6 +78,8 @@ const Product = () => {
             setVariants([...variants, variant]);
         }
     };
+
+    // * Show all products
     useEffect(() => {
         (
             async () => {
@@ -127,6 +129,38 @@ const Product = () => {
         )();
     }, [filters, router, categories, variants, checkedHighestPrice, checkedLowestPrice, checkedNewestDate, checkedOldestDate])
 
+    // * Get All Variants
+    const [getVariants, setGetVariants] = useState([]);
+    const [getCategories, setGetCategories] = useState([]);
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    const {data : variantData} = await axios.get('variants');
+                    // * Display unique product variant names (without repetition) 
+                    // ? https://www.phind.com/search?cache=mnr17wlwqumusah7cbhriotn
+                    const uniqueVariants = variantData.filter((v, i, a) => a.findIndex(t => (t.name === v.name)) === i);
+                    setGetVariants(uniqueVariants);                    
+
+                    const {data : categoryData} = await axios.get('categories');
+                    setGetCategories(categoryData);
+                } catch (error) {
+                    if (error.response && error.response.status === 401) {
+                        router.push('/login');
+                    }
+
+                    if (error.response && error.response.status === 403) {
+                        router.push('/login');
+                    }
+
+                    if (error.response && error.response.status === 404) {
+                        router.push('/login');
+                    }
+                }
+            }
+        )();
+    }, [])
+    
     // * Showing the toast after deletion
     useEffect(() => {
         const deleteSuccess = sessionStorage.getItem('deleteSuccess');
@@ -222,6 +256,8 @@ const Product = () => {
                                     handleDateCheckedNewest={() => handleNewestDateChecked()}
                                     checkedDateOldest={checkedOldestDate}
                                     handleDateCheckedOldest={() => handleOldestDateChecked()}
+                                    getVariants={getVariants}
+                                    getCategories={getCategories}
                                     handleCategoryChange={handleCategoryChange}
                                     handleVariantChange={handleVariantChange}
                                 />
@@ -263,7 +299,9 @@ const Product = () => {
                                         ) : (
                                             <>
                                                 <tr>
-                                                    <td colSpan={5} className='text-center'>No Data Found</td>
+                                                    <td colSpan={5} className='text-center'>
+                                                        No Data Found
+                                                    </td>
                                                 </tr>
                                             </>
                                         )}

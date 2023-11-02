@@ -6,7 +6,8 @@ const ShowProductForm = ({
     image,
     price,
     product_images,
-    variants
+    variants,
+    category
 }) => {
     return (
         <>
@@ -30,11 +31,20 @@ const ShowProductForm = ({
 
             <div className='mb-5'>
                 <label className="label">
+                    <span className="label-text">Category</span>
+                </label>
+                <div className="btn btn-sm btn-success">
+                    {category}
+                </div>
+            </div>
+
+            <div className='mb-5'>
+                <label className="label">
                     <span className="label-text">Variants</span>
                 </label>
                 <div className="grid grid-cols-4 gap-4">
                     {variants.map((v, index) => (
-                        <div key={index}>
+                        <div className="btn btn-sm btn-info" key={index}>
                             {v.name}
                         </div>
                     ))}
