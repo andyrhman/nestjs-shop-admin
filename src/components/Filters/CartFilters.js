@@ -1,44 +1,41 @@
 import React from 'react'
 
-const ProductFilters = ({
-    checkedPrice,
-    handlePriceChecked,
-    checkedPriceLow,
-    handlePriceCheckedLow,
+const CartFilters = ({
+    checkedCompleted,
+    handleCompleted,
+    checkedUncompleted,
+    handleUncompleted,
+
     checkedDateNewest,
     handleDateCheckedNewest,
     checkedDateOldest,
     handleDateCheckedOldest,
-    getVariants,
-    getCategories,
-    handleCategoryChange,
-    handleVariantChange
 }) => {
     return (
         <>
             {/* Price */}
             <div className="mb-4">
                 <article className="prose">
-                    <h4>Select Price</h4>
+                    <h4>Select Status</h4>
                 </article>
                 <div className='grid grid-cols-3 justify-between'>
                     <div className='join'>
                         <input
                             type="checkbox"
                             className="checkbox checkbox-sm"
-                            checked={checkedPrice}
-                            onChange={handlePriceChecked}
+                            checked={checkedCompleted}
+                            onChange={handleCompleted}
                         />
-                        <span className='pl-2'>Highest</span>
+                        <span className='pl-2'>Completed</span>
                     </div>
                     <div className='join'>
                         <input
                             type="checkbox"
                             className="checkbox checkbox-sm"
-                            checked={checkedPriceLow}
-                            onChange={handlePriceCheckedLow}
+                            checked={checkedUncompleted}
+                            onChange={handleUncompleted}
                         />
-                        <span className='pl-2'>Lowest</span>
+                        <span className='pl-2'>Uncompleted</span>
                     </div>
                 </div>
             </div>
@@ -69,38 +66,8 @@ const ProductFilters = ({
                     </div>
                 </div>
             </div>
-
-            {/* Category */}
-            <div className="mb-4">
-                <article className="prose">
-                    <h4>Select Category</h4>
-                </article>
-                <div className='grid grid-cols-3 justify-between'>
-                    {getCategories.map((c) => (
-                        <div className='join' key={c.id}>
-                            <input type="checkbox" className="checkbox checkbox-sm" value={c.name} onChange={handleCategoryChange} />
-                            <span className='pl-2'>{c.name}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Variant */}
-            <div className="mb-4">
-                <article className="prose">
-                    <h4>Select Variant</h4>
-                </article>
-                <div className='grid grid-cols-3 justify-between'>
-                    {getVariants.map((v) => (
-                        <div className='join'>
-                            <input type="checkbox" className="checkbox checkbox-sm" value={v.name} onChange={handleVariantChange} />
-                            <span className='pl-2'>{v.name}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
         </>
     )
 }
 
-export default ProductFilters
+export default CartFilters

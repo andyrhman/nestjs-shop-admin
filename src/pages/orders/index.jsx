@@ -5,6 +5,8 @@ import axios from 'axios';
 // Materials
 import TablePagination from '@mui/material/TablePagination';
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { Slide, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import Layout from '@/components/Layout';
@@ -48,6 +50,28 @@ const OrdersTable = () => {
             }
         )();
     }, [filters])
+
+
+    // * Showing the toast
+    useEffect(() => {
+        const deleteSuccess = sessionStorage.getItem('deleteSuccess');
+        if (deleteSuccess === '1') {
+            // The page was just reloaded, display the toast:
+            toast.success('Success', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide
+            });
+            // Clear the flag from sessionStorage so the toast isn't shown again on subsequent reloads
+            sessionStorage.removeItem('deleteSuccess');
+        }
+    }, []);
 
     // * Code Reference Modal Open With DaisyUI
     // ? https://stackoverflow.com/questions/76508667/daisyui-modal-does-not-exist-on-type-window-of-type-globalthis
@@ -101,19 +125,17 @@ const OrdersTable = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="join">
                                 <input
                                     type="text"
                                     placeholder="Search for order and order item..."
-                                    className="input input-bordered w-full max-w-full"
+                                    className="input input-sm input-bordered w-full max-w-full"
                                     onChange={(e) => search(e.target.value)}
                                 />
-                                <button className="btn join-item btn-primary">
+                                <button className="btn btn-sm join-item btn-primary">
                                     <MagnifyingGlassIcon className="h-5 w-5" />
                                 </button>
                             </div>
-
                             <div className="block w-full overflow-x-auto">
                                 {orders.length > 0 ? (
                                     <>
@@ -125,6 +147,7 @@ const OrdersTable = () => {
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Total</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -134,11 +157,13 @@ const OrdersTable = () => {
                                                     <tr key={o.id}>
                                                         <OrderTables
                                                             number={page * perPage + index + 1}
-                                                            fullName={o.fullName}
+                                                            fullName={o.name}
                                                             email={o.email}
                                                             total={o.total}
                                                             price={o.price}
                                                             orderItem={() => handleOpen(o)}
+                                                            completed={o.completed}
+                                                            
                                                         />
                                                     </tr>
                                                 ))}
@@ -163,11 +188,10 @@ const OrdersTable = () => {
                                         <h4>No data found</h4>
                                     </div>
                                 )}
-
                             </div>
                         </div>
                     </div>
-                </div >
+                </div>
             </AdminWrapper>
         </Layout>
     )

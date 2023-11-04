@@ -24,13 +24,13 @@ const ProductTables = ({ number, image, title, description, price, editId, delet
             </td>
             <td>Rp{new Intl.NumberFormat('id-ID').format(price)}</td>
             <td>
-                <Link href={showP} className="btn btn-circle btn-info">
+                <Link href={showP} className="btn btn-sm btn-circle btn-info">
                     <EyeIcon strokeWidth={2} className="h-4 w-4" />
                 </Link>
-                <Link href={editId} className="btn btn-circle btn-primary">
+                <Link href={editId} className="btn btn-sm btn-circle btn-primary">
                     <PencilSquareIcon strokeWidth={2} className="h-4 w-4" />
                 </Link>
-                <button className="btn btn-circle btn-error" onClick={deleteId}>
+                <button className="btn btn-sm btn-circle btn-error" onClick={deleteId}>
                     <TrashIcon strokeWidth={2} className="h-4 w-4" />
                 </button>
             </td>

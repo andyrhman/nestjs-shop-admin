@@ -76,7 +76,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/"
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-md uppercase py-3 font-bold block " +
                     (router.pathname === "/"
                       ? "text-sky-500 hover:text-sky-600"
                       : "")
@@ -98,7 +98,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/users"
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-md uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/users") !== -1
                       ? "text-sky-500 hover:text-sky-600"
                       : "")
@@ -120,7 +120,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/products"
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-md uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/products") !== -1
                       ? "text-sky-500 hover:text-sky-600"
                       : "")
@@ -142,7 +142,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link href="/orders"
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-md uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/orders") !== -1
                       ? "text-sky-500 hover:text-sky-600"
                       : "")
@@ -162,9 +162,53 @@ export default function Sidebar() {
               </li>
 
               <li className="items-center">
+                <Link href="/carts"
+                  className={
+                    "text-md uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/carts") !== -1
+                      ? "text-sky-500 hover:text-sky-600"
+                      : "")
+                  }
+                >
+
+                  <i
+                    className={
+                      "fa-solid fa-bag-shopping mr-2 text-sm " +
+                      (router.pathname.indexOf("/carts") !== -1
+                        ? "opacity-75"
+                        : "")
+                    }
+                  ></i>{" "}
+                  Carts
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link href="/reviews"
+                  className={
+                    "text-md uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/reviews") !== -1
+                      ? "text-sky-500 hover:text-sky-600"
+                      : "")
+                  }
+                >
+
+                  <i
+                    className={
+                      "fa-solid fa-star mr-2 text-sm " +
+                      (router.pathname.indexOf("/reviews") !== -1
+                        ? "opacity-75"
+                        : "")
+                    }
+                  ></i>{" "}
+                  Reviews
+                </Link>
+              </li>
+
+              <li className="items-center">
                 <Link href="/settings"
                   className={
-                    "text-xs uppercase py-3 font-bold block " +
+                    "text-md uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/settings") !== -1
                       ? "text-sky-500 hover:text-sky-600"
                       : "")
