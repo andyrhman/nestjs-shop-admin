@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
+
+import Link from 'next/link';
 import axios from 'axios'
 import ErrorAlert from '@/components/Alert/Error'
 import ImageUploads from '@/components/Uploads/ImageUploads'
@@ -236,6 +239,10 @@ const EditProduct = () => {
                                 <ErrorAlert error={error} />
                                 <div className="rounded-t bg-white mb-0 py-6">
                                     <div className="text-center flex justify-between">
+                                        <Link href={'/products'} className="btn btn-sm btn-info text-white hover:text-blue-800">
+                                            <ArrowLeftCircleIcon strokeWidth={2} className="h-4 w-4" />
+                                            Back
+                                        </Link>
                                         <h6 className="text-blueGray-700 text-xl font-bold">Update Products</h6>
                                         <button
                                             className="btn btn-sm btn-info"

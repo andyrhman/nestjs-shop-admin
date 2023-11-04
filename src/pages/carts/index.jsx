@@ -189,7 +189,7 @@ const Carts = () => {
                             </div>
                         </div>
                     </div>
-                </div >
+                </div>
             </AdminWrapper>
         </Layout>
     )
