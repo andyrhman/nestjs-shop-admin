@@ -11,7 +11,7 @@ const AdminNavbar = ({ user }) => {
           {/* Brand */}
           <a
             className="text-white text-sm uppercase inline-block font-semibold"
-            href="#pablo"
+            href="/"
             onClick={(e) => e.preventDefault()}
           >
             Dashboard
