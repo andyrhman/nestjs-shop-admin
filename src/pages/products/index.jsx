@@ -136,13 +136,13 @@ const Product = () => {
         (
             async () => {
                 try {
-                    const {data : variantData} = await axios.get('variants');
+                    const { data: variantData } = await axios.get('variants');
                     // * Display unique product variant names (without repetition) 
                     // ? https://www.phind.com/search?cache=mnr17wlwqumusah7cbhriotn
                     const uniqueVariants = variantData.filter((v, i, a) => a.findIndex(t => (t.name === v.name)) === i);
-                    setGetVariants(uniqueVariants);                    
+                    setGetVariants(uniqueVariants);
 
-                    const {data : categoryData} = await axios.get('categories');
+                    const { data: categoryData } = await axios.get('categories');
                     setGetCategories(categoryData);
                 } catch (error) {
                     if (error.response && error.response.status === 401) {
@@ -160,7 +160,7 @@ const Product = () => {
             }
         )();
     }, [])
-    
+
     // * Showing the toast after deletion
     useEffect(() => {
         const deleteSuccess = sessionStorage.getItem('deleteSuccess');
@@ -266,60 +266,54 @@ const Product = () => {
 
                             {/* table */}
                             <div className="block w-full overflow-x-auto">
-                                <table className="table">
-                                    {/* head */}
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Image & Title</th>
-                                            <th>Description</th>
-                                            <th>Price</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {products.length > 0 ? (
-                                            <>
-                                                {products.slice(page * perPage, (page + 1) * perPage).map((p, index) => (
-                                                    <tr key={p.id}>
-                                                        <ProductTables
-                                                            number={page * perPage + index + 1}
-                                                            id={p.id}
-                                                            title={p.title}
-                                                            image={p.image}
-                                                            description={p.description.split(' ').slice(0, 20).join(' ')}
-                                                            price={p.price}
-                                                            editId={`/products/edit/${p.id}`}
-                                                            showP={`/products/show/${p.slug}`}
-                                                            deleteId={() => del(p.id)}
-                                                        />
-                                                    </tr>
-                                                ))}
-                                            </>
-                                        ) : (
-                                            <>
-                                                <tr>
-                                                    <td colSpan={5} className='text-center'>
-                                                        No Data Found
-                                                    </td>
+                                {products.length > 0 ? (
+                                    <table className="table">
+                                        {/* head */}
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Image & Title</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {products.slice(page * perPage, (page + 1) * perPage).map((p, index) => (
+                                                <tr key={p.id}>
+                                                    <ProductTables
+                                                        number={page * perPage + index + 1}
+                                                        id={p.id}
+                                                        title={p.title}
+                                                        image={p.image}
+                                                        description={p.description.split(' ').slice(0, 20).join(' ')}
+                                                        price={p.price}
+                                                        editId={`/products/edit/${p.id}`}
+                                                        showP={`/products/show/${p.slug}`}
+                                                        deleteId={() => del(p.id)}
+                                                    />
                                                 </tr>
-                                            </>
-                                        )}
-
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <TablePagination
-                                                count={products.length}
-                                                page={page}
-                                                onPageChange={(e, newPage) => setPage(newPage)}
-                                                rowsPerPage={perPage}
-                                                rowsPerPageOptions={[10, 25, 50, 100]}
-                                                onRowsPerPageChange={(e) => setPerPage(parseInt(e.target.value))}
-                                            />
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                            ))}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <TablePagination
+                                                    count={products.length}
+                                                    page={page}
+                                                    onPageChange={(e, newPage) => setPage(newPage)}
+                                                    rowsPerPage={perPage}
+                                                    rowsPerPageOptions={[10, 25, 50, 100]}
+                                                    onRowsPerPageChange={(e) => setPerPage(parseInt(e.target.value))}
+                                                />
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                ) : (
+                                    <div className='flex flex-col justify-center items-center text-center py-10'>
+                                        <img src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto h-auto max-w-full rounded-lg' width={200} height={200} />
+                                        <h4>No data found</h4>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

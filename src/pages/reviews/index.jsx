@@ -5,17 +5,29 @@ import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import AdminWrapper from '@/components/AdminWrapper'
 import ReviewTables from '@/components/Tables/ReviewTables'
+import TablePagination from '@mui/material/TablePagination';
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
+    const [page, setPage] = useState(0);
+    const [perPage, setPerPage] = useState(10);
+
+    const [filters, setFilters] = useState({
+        s: ''
+    });
     const router = useRouter();
 
     useEffect(() => {
         (
             async () => {
                 try {
-                    const { data } = await axios.get(`reviews`);
+                    const arr = [];
+                    if (filters.s) {
+                        arr.push(`search=${filters.s}`)
+                    }
+                    const { data } = await axios.get(`reviews?${arr.join('&')}`)
                     setReviews(data);
+                    setPage(0);
                 } catch (error) {
                     if (error.response && error.response.status === 401) {
                         router.push('/login');
@@ -49,32 +61,51 @@ const Reviews = () => {
                                 </div>
                             </div>
                             <div className="block w-full overflow-x-auto">
-                                <table className='table'>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>User</th>
-                                            <th>Product</th>
-                                            <th>Comment</th>
-                                            <th>Rating</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {reviews.map((r, index) => (
-                                            <tr key={r.id}>
-                                                <ReviewTables 
-                                                    count={index + 1}
-                                                    user={r.user.fullName}
-                                                    product={r.product.title}
-                                                    comment={r.comment}
-                                                    rating={r.star}
-                                                    info={r.id}
+                                {reviews.length > 0 ? (
+                                    <table className='table'>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>User</th>
+                                                <th>Product</th>
+                                                <th>Comment</th>
+                                                <th>Rating</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {reviews.slice(page * perPage, (page + 1) * perPage).map((r, index) => (
+                                                <tr key={r.id}>
+                                                    <ReviewTables
+                                                        count={page * perPage + index + 1}
+                                                        user={r.user.fullName}
+                                                        product={r.product.title}
+                                                        comment={r.comment}
+                                                        rating={r.star}
+                                                        info={r.id}
+                                                    />
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <TablePagination
+                                                    count={reviews.length}
+                                                    page={page}
+                                                    onPageChange={(e, newPage) => setPage(newPage)}
+                                                    rowsPerPage={perPage}
+                                                    rowsPerPageOptions={[10, 25, 50, 100]}
+                                                    onRowsPerPageChange={(e) => setPerPage(parseInt(e.target.value))}
                                                 />
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </tfoot>
+                                    </table>
+                                ) : (
+                                    <div className='flex flex-col justify-center items-center text-center py-10'>
+                                        <img src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto h-auto max-w-full rounded-lg' width={200} height={200} />
+                                        <h4>No data found</h4>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
