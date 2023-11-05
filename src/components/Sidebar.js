@@ -223,7 +223,7 @@ export default function Sidebar() {
                         : "")
                     }
                   ></i>{" "}
-                  Profile
+                  Settings
                 </Link>
               </li>
 
