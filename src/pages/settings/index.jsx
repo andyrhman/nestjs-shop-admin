@@ -48,7 +48,7 @@ const Settings = ({ user }) => {
                 }
             }
         )()
-    }, [user]);
+    }, [router, user]);
 
     useEffect(() => {
         (
@@ -70,7 +70,7 @@ const Settings = ({ user }) => {
                 }
             }
         )()
-    }, [])
+    }, [router])
 
 
     const submitInfo = async (e) => {

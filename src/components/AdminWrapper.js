@@ -11,29 +11,23 @@ import { connect } from "react-redux";
 import { setUser } from "@/redux/actions/setUserAction";
 
 const AdminWrapper = (props) => {
+    const { setUser } = props;
     const router = useRouter()
+
     useEffect(() => {
         (
             async () => {
                 try {
-                    const {data} = await http.get('admin');
-                    props.setUser(data);
+                    const { data } = await http.get('admin');
+                    setUser(data);
                 } catch (error) {
-                    if (error.response && error.response.status === 401) {
-                        router.push('/login');
-                    }
-
-                    if (error.response && error.response.status === 403) {
-                        router.push('/login');
-                    }
-
-                    if (error.response && error.response.status === 404) {
+                    if (error.response && [401, 403, 404].includes(error.response.status)) {
                         router.push('/login');
                     }
                 }
             }
         )();
-    }, [])
+    }, [setUser]);  // Include setUser in the dependency array
     
     return (
         <Layout>

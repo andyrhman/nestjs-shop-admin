@@ -92,7 +92,7 @@ const ProductFilters = ({
                 </article>
                 <div className='grid grid-cols-3 justify-between'>
                     {getVariants.map((v) => (
-                        <div className='join'>
+                        <div className='join' key={v.id}>
                             <input type="checkbox" className="checkbox checkbox-sm" value={v.name} onChange={handleVariantChange} />
                             <span className='pl-2'>{v.name}</span>
                         </div>

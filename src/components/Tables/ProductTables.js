@@ -11,7 +11,7 @@ const ProductTables = ({ number, image, title, description, price, editId, delet
                 <div className="flex items-center">
                     <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                            <img src={image} alt="Avatar Tailwind CSS Component" />
+                            <img src={image} width={12} height={12} alt={title} />
                         </div>
                     </div>
                     <div className="pl-2">

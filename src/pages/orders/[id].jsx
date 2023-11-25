@@ -28,15 +28,11 @@ const UpdateOrderStatus = () => {
                         if (error.response && error.response.status === 403) {
                             router.push('/login');
                         }
-
-                        if (error.response && error.response.status === 404) {
-                            router.push('/login');
-                        }
                     }
                 }
             )()
         }
-    }, [id])
+    }, [router, id])
 
     const submit = async (e) => {
         e.preventDefault();

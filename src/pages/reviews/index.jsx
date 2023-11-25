@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
+import Image from 'next/image'
 import Layout from '@/components/Layout'
 import AdminWrapper from '@/components/AdminWrapper'
 import ReviewTables from '@/components/Tables/ReviewTables'
@@ -36,14 +37,10 @@ const Reviews = () => {
                     if (error.response && error.response.status === 403) {
                         router.push('/login');
                     }
-
-                    if (error.response && error.response.status === 404) {
-                        router.push('/login');
-                    }
                 }
             }
         )();
-    }, [])
+    }, [router, filters])
 
     return (
         <Layout>
@@ -102,7 +99,7 @@ const Reviews = () => {
                                     </table>
                                 ) : (
                                     <div className='flex flex-col justify-center items-center text-center py-10'>
-                                        <img src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto h-auto max-w-full rounded-lg' width={200} height={200} />
+                                        <Image src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto w-full h-52 rounded-lg' width={0} height={0} priority/>
                                         <h4>No data found</h4>
                                     </div>
                                 )}

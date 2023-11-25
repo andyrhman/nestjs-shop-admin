@@ -118,6 +118,28 @@ export default function Sidebar() {
               </li>
 
               <li className="items-center">
+                <Link href="/categories"
+                  className={
+                    "text-md uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/categories") !== -1
+                      ? "text-sky-500 hover:text-sky-600"
+                      : "")
+                  }
+                >
+
+                  <i
+                    className={
+                      "fas fa-boxes-stacked mr-2 text-sm " +
+                      (router.pathname.indexOf("/categories") !== -1
+                        ? "opacity-75"
+                        : "")
+                    }
+                  ></i>{" "}
+                  Categories
+                </Link>
+              </li>
+
+              <li className="items-center">
                 <Link href="/products"
                   className={
                     "text-md uppercase py-3 font-bold block " +
