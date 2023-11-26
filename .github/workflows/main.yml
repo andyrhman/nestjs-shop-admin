@@ -1,0 +1,19 @@
+# https://www.phind.com/search?cache=uw30a1s89jaw9t13lrqbq633
+name: CI/CD Pipeline
+
+on:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Generate deployment package
+      run: zip -r ${{ github.run_id }}.zip . -x '*.git*'
