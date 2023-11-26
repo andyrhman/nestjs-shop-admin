@@ -26,5 +26,5 @@ jobs:
         application_name: nestjs-admin
         environment_name: Nestjs-admin-env 
         region: ap-southeast-1
-        version_label: ${{github.run_number}}
+        version_label: ${{github.sha}}
         deployment_package: ${{ github.run_id }}.zip
