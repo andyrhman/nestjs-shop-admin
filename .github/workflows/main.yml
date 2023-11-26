@@ -13,7 +13,18 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Generate deployment package
       run: zip -r ${{ github.run_id }}.zip . -x '*.git*'
+
+    - name: Deploy to AWS Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        application_name: nestjs-admin
+        environment_name: Nestjs-admin-env 
+        region: ap-southeast-1
+        version_label: ${{github.run_number}}
+        deployment_package: ${{ github.run_id }}.zip
