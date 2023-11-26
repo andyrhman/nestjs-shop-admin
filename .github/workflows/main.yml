@@ -15,7 +15,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Generate deployment package
+    - name: Generate deployment package.
       run: zip -r ${{ github.run_id }}.zip . -x '*.git*'
 
     - name: Deploy to AWS Elastic Beanstalk
