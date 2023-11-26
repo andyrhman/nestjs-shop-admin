@@ -23,8 +23,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-        application_name: nestjs-admin
-        environment_name: Nestjs-admin-env 
+        application_name: nextjs-admin
+        environment_name: Nextjs-admin-env 
         region: ap-southeast-1
         version_label: ${{github.sha}}
         deployment_package: ${{ github.run_id }}.zip
