@@ -133,13 +133,13 @@ const Product = () => {
         (
             async () => {
                 try {
-                    const { data: variantData } = await axios.get('variants');
+                    const { data: variantData } = await http.get('variants');
                     // * Display unique product variant names (without repetition) 
                     // ? https://www.phind.com/search?cache=mnr17wlwqumusah7cbhriotn
                     const uniqueVariants = variantData.filter((v, i, a) => a.findIndex(t => (t.name === v.name)) === i);
                     setGetVariants(uniqueVariants);
 
-                    const { data: categoryData } = await axios.get('categories');
+                    const { data: categoryData } = await http.get('categories');
                     setGetCategories(categoryData);
                 } catch (error) {
                     if (error.response && error.response.status === 401) {
