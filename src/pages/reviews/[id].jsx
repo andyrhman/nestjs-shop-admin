@@ -13,7 +13,6 @@ const ReviewInfo = () => {
     const [review, setReview] = useState('');
     const [user, setUser] = useState('');
     const [product, setProduct] = useState('');
-    const [variant, setVariant] = useState('');
 
     const router = useRouter();
     const { id } = router.query;
@@ -26,17 +25,12 @@ const ReviewInfo = () => {
                         setReview(data);
                         setUser(data.user.fullName);
                         setProduct(data.product.title);
-                        setVariant(data.variant.name);
                     } catch (error) {
                         if (error.response && error.response.status === 401) {
                             router.push('/login');
                         }
 
                         if (error.response && error.response.status === 403) {
-                            router.push('/login');
-                        }
-
-                        if (error.response && error.response.status === 404) {
                             router.push('/login');
                         }
                     }
@@ -69,7 +63,6 @@ const ReviewInfo = () => {
                                     product={product}
                                     rating={review.star}
                                     comment={review.comment}
-                                    variant={variant}
                                 />
                             </div>
                         </div>

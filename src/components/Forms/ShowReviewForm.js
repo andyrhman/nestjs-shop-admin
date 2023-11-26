@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 const StarRatings = dynamic(() => import('react-star-ratings'), { ssr: false });
 
-const ShowReviewForm = ({ user, product, comment, rating, variant }) => {
+const ShowReviewForm = ({ user, product, comment, rating }) => {
     return (
         <>
             <div className='mb-5'>
@@ -21,15 +21,6 @@ const ShowReviewForm = ({ user, product, comment, rating, variant }) => {
                 </label>
                 <div>
                     {product}
-                </div>
-            </div>
-
-            <div className='mb-5'>
-                <label className="label">
-                    <span className="label-text">Variant</span>
-                </label>
-                <div>
-                    {variant}
                 </div>
             </div>
 

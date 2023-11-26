@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'standalone',
     env: {
         siteDescription: "Admin site for managing shopyfy",
         siteKeywords: "Admin",
@@ -9,21 +10,13 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: '**.tailwindui.com'
+                protocol: "https",
+                hostname: "**",
             },
             {
-                protocol: 'https',
-                hostname: '**.placeholder.com'
-            },
-            {
-                protocol: 'https',
-                hostname: '**.gstatic.com'
-            },
-            {
-                protocol: 'https',
-                hostname: '**.loremflickr.com'
-            },
+                protocol: "http",
+                hostname: "**",
+            }
         ]
     }
 };

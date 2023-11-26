@@ -81,10 +81,6 @@ const CreateProductForm = ({ }) => {
                     if (error.response && error.response.status === 403) {
                         router.push('/login');
                     }
-
-                    if (error.response && error.response.status === 404) {
-                        router.push('/login');
-                    }
                 }
             }
         )()
@@ -127,7 +123,7 @@ const CreateProductForm = ({ }) => {
                         className="select select-bordered w-full max-w-full"
                         onChange={(e) => setCategory(e.target.value)}
                     >
-                        <option disabled selected>Select Category</option>
+                        <option disabled>Select Category</option>
                         {categories?.map((c) => {
                             return <option key={c.id} value={c.id}>{c.name}</option>
                         })}

@@ -80,15 +80,11 @@ const EditProduct = () => {
                         if (error.response && error.response.status === 403) {
                             router.push('/login');
                         }
-
-                        if (error.response && error.response.status === 404) {
-                            router.push('/login');
-                        }
                     }
                 }
             )();
         }
-    }, [id])
+    }, [router, id])
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
@@ -105,14 +101,10 @@ const EditProduct = () => {
                     if (error.response && error.response.status === 403) {
                         router.push('/login');
                     }
-
-                    if (error.response && error.response.status === 404) {
-                        router.push('/login');
-                    }
                 }
             }
         )()
-    }, [])
+    }, [router])
 
     // * Showing the toast after deletion
     useEffect(() => {
@@ -304,7 +296,7 @@ const EditProduct = () => {
                                         <label className="label">
                                             <span className="label-text">Image</span>
                                         </label>
-                                        <img src={image} width={200} height={200} className='h-auto max-w-full rounded-lg' />
+                                        <img src={image} width={200} height={200} className='h-auto max-w-full rounded-lg' alt={title}/>
                                         <input
                                             className='hidden'
                                             ref={ref}
@@ -351,7 +343,7 @@ const EditProduct = () => {
                                         <div className="grid grid-cols-3 gap-4 mb-2">
                                             {images.map((i, index) => (
                                                 <div className='flex flex-col items-center justify-center' key={index}>
-                                                    <img src={i.image} width={200} height={200} className='h-auto max-w-full rounded-lg' />
+                                                    <img src={i.image} width={200} height={200} className='h-auto max-w-full rounded-lg' alt={`image-${index}`}/>
                                                     <button className="btn btn-sm btn-outline btn-circle btn-error" onClick={(e) => del(e, i.id, 'image')}>
                                                         <TrashIcon strokeWidth={2} className="h-4 w-4" />
                                                     </button>

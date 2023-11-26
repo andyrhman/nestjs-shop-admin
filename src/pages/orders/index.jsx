@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import axios from 'axios';
 
 // Materials
@@ -42,14 +43,10 @@ const OrdersTable = () => {
                     if (error.response && error.response.status === 403) {
                         router.push('/login');
                     }
-
-                    if (error.response && error.response.status === 404) {
-                        router.push('/login');
-                    }
                 }
             }
         )();
-    }, [filters])
+    }, [router, filters])
 
 
     // * Showing the toast
@@ -184,7 +181,7 @@ const OrdersTable = () => {
                                     </>
                                 ) : (
                                     <div className='flex flex-col justify-center items-center text-center py-10'>
-                                        <img src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto h-auto max-w-full rounded-lg' width={200} height={200} />
+                                        <Image src="/images/undraw_taken_re_yn20.svg" alt="Not Found" className='mx-auto w-full h-52 rounded-lg' width={0} height={0} priority/>
                                         <h4>No data found</h4>
                                     </div>
                                 )}
