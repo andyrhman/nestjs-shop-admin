@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import { configStore } from '@/redux/configureStore';
 import { Provider } from 'react-redux';
 
-axios.defaults.baseURL = process.env.SERVER_ENDPOINT;
+axios.defaults.baseURL = process.env.SERVER_ENDPOINT_1;
 axios.defaults.withCredentials = true;
 
 const store = configStore();

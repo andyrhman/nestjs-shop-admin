@@ -15,6 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: 'Create env file'
+        run: |
+          echo SERVER_ENDPOINT_1=${{ secrets.SERVER_ENDPOINT_1 }} >> .env.local
+          echo SERVER_ENDPOINT_2=${{ secrets.SERVER_ENDPOINT_2 }} >> .env.local
+      
       - name: Build Docker images and push to Docker Hub
         run: |
           docker build -t tataran/shop-admin .
