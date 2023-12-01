@@ -6,6 +6,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# ! If you use environment on your project use this
 COPY .env.local ./
 
 # Install dependencies based on the preferred package manager
