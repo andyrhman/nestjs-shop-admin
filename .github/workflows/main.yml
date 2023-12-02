@@ -14,15 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: 'Create env file'
-        run: |
-          echo SERVER_ENDPOINT_1=${{ secrets.SERVER_ENDPOINT_1 }} >> .env.local
-          echo SERVER_ENDPOINT_2=${{ secrets.SERVER_ENDPOINT_2 }} >> .env.local
       
       - name: Build Docker images and push to Docker Hub
         run: |
-          docker build . -t tataran/shop-admin
+          docker build --build-arg SERVER_ENDPOINT_1=${{ secrets.SERVER_ENDPOINT_1 }} --build-arg SERVER_ENDPOINT_2=${{ secrets.SERVER_ENDPOINT_2 }} -t tataran/shop-admin .
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
           docker push tataran/shop-admin
         env:

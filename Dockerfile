@@ -6,9 +6,6 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# ! If you use environment on your project use this
-# COPY .env.local ./
-
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -42,6 +39,13 @@ WORKDIR /app
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
+
+# Add your environment variables
+ARG SERVER_ENDPOINT_1
+ARG SERVER_ENDPOINT_2
+
+ENV SERVER_ENDPOINT_1=$SERVER_ENDPOINT_1
+ENV SERVER_ENDPOINT_2=$SERVER_ENDPOINT_2
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
