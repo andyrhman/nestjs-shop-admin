@@ -32,6 +32,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: 'Create env file'
+      run: |
+        echo NEXT_PUBLIC_SERVER_ENDPOINT_1=${{ secrets.NEXT_PUBLIC_SERVER_ENDPOINT_1 }} >> .env.local
+        echo NEXT_PUBLIC_SERVER_ENDPOINT_2=${{ secrets.NEXT_PUBLIC_SERVER_ENDPOINT_2 }} >> .env.local
+
     - name: Generate deployment package.
       run: zip -r ${{ github.run_id }}.zip . -x '*.git*'
 
