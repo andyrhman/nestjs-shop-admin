@@ -115,12 +115,6 @@ export default function UsersTable() {
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            {/* 
-                                        // * Advance pagination code reference
-                                        // ? https://www.phind.com/search?cache=o734sb794zbdnkjjd97gv93x
-                                        // ? https://www.phind.com/search?cache=vixixb6zji1ik0r3bgmvj5vq
-                                        */}
-
                                             <TablePagination
                                                 count={users.length}
                                                 page={page}
